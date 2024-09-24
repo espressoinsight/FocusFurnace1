@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head class="custom-cursor">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8MWQJR8PJP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8MWQJR8PJP');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "o7clnx9626");
+</script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusFurnace</title>
@@ -41,13 +62,6 @@
             display: flex;
             align-items: center;
             width: 100%;
-            /*
-            flex-direction: column;
-            justify-content: space-between;
-            height: 50px;
-            margin-bottom: 20px;
-            */
-
         }
 
         .input-area {
@@ -58,7 +72,6 @@
             text-align: center; /* Center text alignment */
             margin-left: 20px;
             margin-right: 10px;
-            /*margin-bottom: 20px;*/
         }
 
         .drop-zone {
@@ -97,8 +110,6 @@
             border-radius: 4px;
             padding: 10px;
             margin-right: 10px;
-            /*width: 300px;
-            */
             background-color: #808080;
             max-width: 300px;
             min-width: 150px;
@@ -128,7 +139,6 @@
         .columnLogs {
             width: 30%;
             padding: 10px;
-            /*background: #8F5337;*/
             background-image: url('logs.jpeg');
             border: 3px solid #413629;
             border-radius: 20px;
@@ -139,9 +149,7 @@
         .columnFire {
             width: 30%;
             padding: 10px;
-            /*background: #FF8C00;*/
             background-image: url('campfire.jpeg');
-            /*border: 3px solid #FF4500;*/
             border: 3px solid #4B3D32;
             border-radius: 20px;
             min-height: 50vh;
@@ -169,15 +177,6 @@
             border-radius: 4px;
             cursor: move;
         }
-
-
-        /*
-        .column h2 {
-            margin-top: 10px;
-            font-size: 1.5em;
-            color: #D3B188; light wood color
-        }*/
-
 
     </style>
 </head>
