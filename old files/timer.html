@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Timer</title>
+</head>
+<body>
+    <h1>Focus Furnace Task Timer</h1>
+    <div>
+        <input type="text" id="taskInput" placeholder="Enter a task" />
+        <button onclick="addTask()">Add Task</button>
+    </div>
+    
+    <ul id="taskList"></ul>
+
+    <script>
+
+let tasks = [];
+let taskTimers = {};
+
+// Function to add a new task
+function addTask() {
+    const taskInput = document.getElementById('taskInput');
+    const taskName = taskInput.value;
+    if (taskName === '') return;
+
+    // Create a new task object
+    const taskId = `task_${new Date().getTime()}`; // unique ID
+    const task = {
+        id: taskId,
+        name: taskName,
+        startTime: Date.now(),
+        elapsedTime: 0,  // Initialize with 0, this stores how much time has already passed
+        isComplete: false
+    };
+    
+    tasks.push(task);
+    taskTimers[taskId] = setInterval(() => updateTimer(taskId), 100);  // update every 100 milliseconds (0.1 second)
+
+    renderTasks();
+
+    // Clear input
+    taskInput.value = '';
+}
+
+// Function to render the task list
+function renderTasks() {
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = ''; // Clear current list
+
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.id = task.id;
+
+        const taskNameSpan = document.createElement('span');
+        taskNameSpan.textContent = task.name;
+
+        const timerSpan = document.createElement('span');
+        timerSpan.id = `timer_${task.id}`;
+        timerSpan.style.marginLeft = '10px';
+        timerSpan.textContent = '00:00.0';  // Initialize with tenths of a second
+
+        const completeButton = document.createElement('button');
+        completeButton.id = `button_${task.id}`;
+        completeButton.textContent = task.isComplete ? 'Resume' : 'Complete';
+        completeButton.onclick = () => toggleTaskStatus(task.id);
+
+        li.appendChild(taskNameSpan);
+        li.appendChild(timerSpan);
+        li.appendChild(completeButton);
+        taskList.appendChild(li);
+    });
+}
+
+// Function to update the timer display for a task
+function updateTimer(taskId) {
+    const task = tasks.find(t => t.id === taskId);
+    if (task.isComplete) return;  // If task is completed/paused, don't update the timer
+
+    const elapsed = (Date.now() - task.startTime) / 1000 + task.elapsedTime; // Elapsed time in seconds (including fractions)
+    
+    const minutes = String(Math.floor(elapsed / 60)).padStart(2, '0');
+    const seconds = String(Math.floor(elapsed % 60)).padStart(2, '0');
+    const fractions = String(Math.floor((elapsed % 1) * 10)); // Get tenths of a second
+
+    const timerSpan = document.getElementById(`timer_${taskId}`);
+    if (timerSpan) {
+        timerSpan.textContent = `${minutes}:${seconds}.${fractions}`; // Update with fractions
+    }
+}
+
+// Function to toggle between completing (pausing) and restarting a task
+function toggleTaskStatus(taskId) {
+    const task = tasks.find(t => t.id === taskId);
+    if (task.isComplete) {
+        // If task is marked as complete, we "resume" it
+        task.isComplete = false;
+        task.startTime = Date.now(); // Set a new start time (resuming from where it left off)
+        taskTimers[taskId] = setInterval(() => updateTimer(taskId), 100); // Restart the timer
+        document.getElementById(`button_${taskId}`).textContent = 'Complete'; // Update button text
+    } else {
+        // If task is active, we "complete" it (pause the timer)
+        clearInterval(taskTimers[taskId]); // Stop the timer
+        task.isComplete = true;
+
+        // Calculate elapsed time and store it
+        const elapsedTime = (Date.now() - task.startTime) / 1000; // Time in seconds with fractions
+        task.elapsedTime += elapsedTime; // Add to previously elapsed time (if resuming)
+
+        // Store the final elapsed time in sessionStorage
+        sessionStorage.setItem(`task_${taskId}_time`, task.elapsedTime);
+
+        // Display the final frozen time
+        const minutes = String(Math.floor(task.elapsedTime / 60)).padStart(2, '0');
+        const seconds = String(Math.floor(task.elapsedTime % 60)).padStart(2, '0');
+        const fractions = String(Math.floor((task.elapsedTime % 1) * 10)); // Tenths of a second
+        document.getElementById(`timer_${taskId}`).textContent = `${minutes}:${seconds}.${fractions}`;
+
+        document.getElementById(`button_${taskId}`).textContent = 'Resume'; // Update button text
+    }
+}
+
+    </script>
+</body>
+</html>
