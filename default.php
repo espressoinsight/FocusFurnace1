@@ -467,6 +467,6 @@
     </script>
 
 </body>
-<div style="color: grey; font-size: 12px; align: left;">a cozy, campfire themed to-do list built by espressoinsight.com</div>
+<div style="color: grey; font-size: 12px; align: left;">a cozy, campfire themed to-do list built by espressoinsight.com :-]</div>
 
 </html>
