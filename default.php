@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head class="custom-cursor">
+    <title>Focus Furnace</title>
+  <link rel="icon" type="image/x-icon" href="campfire.jpeg">
+
     <!-- *****  JQUERY CDN  ***** -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
