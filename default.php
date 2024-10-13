@@ -66,19 +66,21 @@
         margin: 0;
         padding: 0;
         font-size: 2em;
+        letter-spacing: -0.4px;
     }
 
     .lowHead {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start; /* Align items to the start of the container */
+        flex-wrap: wrap; /* You can keep this if needed, but it's less relevant for a column layout */
         width: 100%;
-        max-width: 800px;
-        padding: 10px 15px;
-        margin: 10px 5px;
+        max-width: 300px;
+        /*padding: 10px 15px;
+        margin: 10px 5px;*/
         border-radius: 10px;
     }
+
 
     .input-area {
         display: flex;
@@ -87,7 +89,7 @@
         align-items: center;
         width: 100%;
         max-width: 400px;
-        margin-bottom: 10px;
+        /*margin-bottom: 5px;*/
     }
 
     .lowHead input {
@@ -125,8 +127,11 @@
         cursor: pointer;
         min-width: 80px;
         padding: 10px;
+        margin-top: 10px;
         box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
         transition: background-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 165, 0, 0.5); /* More distinct shadow */
+        transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Added transform transition */
     }
 
     .lowHead button:hover {
@@ -137,6 +142,8 @@
     footer button:hover {
         background-color: #993C1B;
         box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+        transform: translateY(2px); /* Slight lift effect */
+
     }
 
     footer {
@@ -162,7 +169,7 @@
         background-image: url('campfire.jpeg');
         /*background-size: cover;*/
         border-radius: 10px;
-        min-height: 60vh;
+        min-height: 65vh;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         padding: 20px;
         overflow-y: auto;
@@ -211,9 +218,9 @@
 
         .lowHead {
             flex-direction: column;
-            align-items: stretch;
-            padding: 10px;
-            margin: 5px;
+            align-items: flex-start; /* Align items to the start of the container */
+            /*padding: 10px;
+            margin: 5px;*/
         }
 
         .input-area {
@@ -257,17 +264,20 @@
 <body class="custom-cursor">
     <div class="header custom-cursor">
         <h1 class="h1">
-            Focus on your chores ☕
+        Get stuff done. 🔥
         </h1>
-        <p>Put out fires, burn down logs, track your progress.</p>
+        <!--<p>Put out fires, burn down logs, track your progress.</p>-->
     </div>
     <div class="lowHead">
+    <p>✅ <b><span id="completed-counter">0</span></b> tasks done</p>
+        <p>⏰ <b><span id="average-time">00:00.0</span></b> avg. time spent</p><br>
         <div class="input-area">
-            <input type="text" id="new-task" placeholder="Enter a new task...">
-            <button id="add-task">Add</button>
+            <input type="text" id="new-task" placeholder="What's due?"></input>
+            <!--
+                <button id="add-task">Add</button>
+            -->
         </div>
-        <p>Done 🔥: <b><span id="completed-counter">0</span></b></p>
-        <p>Average ⏱️: <b><span id="average-time">00:00.0</span></b></p>
+
     </div>
     <div class="container">
         <div id="backlog" class="columnLogs custom-cursor">
@@ -275,11 +285,11 @@
     </div>
 
 <footer>
-  <p>See your trends and progress:</p>
+  <p>Signup to <b>Save Tasks</b> and <b>See Trends</b>.</p>
 
   <a href="https://focusfurnace.com/progress-report.php" target="_blank">
     <button>
-    Sign Up
+   Go
     </button>
 </a>
 </footer>
@@ -454,6 +464,6 @@
     </script>
 
 </body>
-<div style="color: grey; font-size: 12px; align: left;">built by espressoinsight.com</div>
+<div style="color: grey; font-size: 12px; align: left;">a cozy, campfire themed to-do list built by espressoinsight.com</div>
 
 </html>
