@@ -292,7 +292,7 @@
 
   <a href="https://focusfurnace.com/progress-report.php" target="_blank">
     <button>
-   Go
+   Get Started
     </button>
 </a>
 </footer>
